@@ -1,0 +1,40 @@
+$drawerWidth: 25%;
+
+.root {
+  display: flex;
+}
+
+.menuButton {
+  margin-right: 1em;
+
+  @media (min-width: 960px) {
+    display: none;
+  }
+}
+
+.drawer {
+  padding: 3em 0 3em 3em;
+
+  .listButton {
+    padding: 1.5em 0;
+    .listItem {
+      padding-left: 1em;
+    }
+  }
+
+
+
+  .link {
+    display: flex;
+  }
+}
+
+.drawerPaper {
+  width: $drawerWidth;
+  background-color: #0C365A !important;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 16px;
+}

@@ -1,1 +1,9 @@
-/* Your styles goes here. */
+$drawerWidth: 25%;
+
+.shiftTextLeft {
+    margin-left: '0px';
+}
+
+.shiftTextRight {
+    margin-left: $drawerWidth,
+}
