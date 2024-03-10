@@ -12,16 +12,25 @@ import styles from './mycards.module.scss';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { RemoveRedEye } from '@mui/icons-material';
 import DownArrowIcon from '../../../icons/DownArrowIcon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import './mycards.scss';
+
+interface Card {
+  id: number;
+  name: string;
+  cardNumber: string;
+  cvv: string;
+}
+
 const MyCards = () => {
   const [isCardDetailsVisible, setIsCardDetailsVisible] = useState(false);
-  const cards = [
-    { name: 'Mark Henry', cardNumber: '1234567890123456', cvv: 123 },
-    { name: 'John Doe', cardNumber: '1234567890123456', cvv: 123 },
-    { name: 'Jane Doe', cardNumber: '1234567890123456', cvv: 123 },
-  ];
+  const [cards, setCards] = useState<Card[]>([]);
+  useEffect(() => {
+    fetch('http://localhost:3001/my-cards')
+      .then((response) => response.json())
+      .then((data) => setCards(data));
+  }, []);
 
   const actions = [
     { name: 'Freeze card', icon: 'freeze.svg' },
@@ -37,7 +46,7 @@ const MyCards = () => {
       : '•••• •••• •••• ' + cardNumber.slice(-4);
   };
 
-  const maskCVV = (cvv: number) => {
+  const maskCVV = (cvv: string) => {
     return isCardDetailsVisible ? cvv : '***';
   };
   return (
@@ -57,12 +66,13 @@ const MyCards = () => {
           </Button>
         </div>
         <Carousel
+          showThumbs={false}
           showArrows={false}
           showStatus={false}
           className={'aspire-carousel'}
         >
-          {cards.map((card, index) => (
-            <div key={index}>
+          {cards.map((card) => (
+            <div key={card.id}>
               <Card className={styles.card}>
                 <CardContent>
                   <div className={styles.cardHeader}>
@@ -71,21 +81,25 @@ const MyCards = () => {
                   <Typography
                     className={styles.cardText}
                     variant="h5"
-                    sx={{ fontWeight: '600', marginBottom: '2em'}}
+                    sx={{ fontWeight: '600', marginBottom: '2em' }}
                   >
                     {card.name}
                   </Typography>
                   <Typography
                     className={styles.cardText}
                     variant="h6"
-                    sx={{ fontWeight: '500', letterSpacing: '0.5em', marginBottom: '1em'}}
+                    sx={{
+                      fontWeight: '500',
+                      letterSpacing: '0.5em',
+                      marginBottom: '1em',
+                    }}
                   >
                     {maskCardDetails(card.cardNumber)}
                   </Typography>
                   <Typography
                     className={styles.cardText}
                     variant="body2"
-                    sx={{ fontWeight: '500', marginBottom: '1em'}}
+                    sx={{ fontWeight: '500', marginBottom: '1em' }}
                   >
                     <span>Thru: 12/25</span>
                     <span>CVV: {maskCVV(card.cvv)}</span>
@@ -104,7 +118,7 @@ const MyCards = () => {
               <IconButton disableRipple>
                 <img src={action.icon} alt={action.name} />
               </IconButton>
-              <Typography sx={{ color: '#0C365A', }} variant={'body1'}>
+              <Typography sx={{ color: '#0C365A' }} variant={'body1'}>
                 {action.name}
               </Typography>
             </div>
