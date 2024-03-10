@@ -5,11 +5,11 @@ import ListItemButton from '@mui/material/ListItemButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import styles from './SideNav.module.scss'; // Import the SCSS module
-import HomeIcon from '../icons/HomeIcon';
-import CardIcon from '../icons/CardIcon';
-import PaymentsIcon from '../icons/PaymentsIcon';
-import CreditIcon from '../icons/CreditIcon';
-import AccountIcon from '../icons/AccountIcon';
+import HomeIcon from '../../icons/HomeIcon';
+import CardIcon from '../../icons/CardIcon';
+import PaymentsIcon from '../../icons/PaymentsIcon';
+import CreditIcon from '../../icons/CreditIcon';
+import AccountIcon from '../../icons/AccountIcon';
 import { useLocation } from 'react-router-dom';
 
 interface SideNavProps {
@@ -55,10 +55,13 @@ const SideNav = ({ isDrawerOpen, setDrawerOpen }: SideNavProps) => {
 
   const drawer = (
     <div className={styles.drawer}>
+      <div className={styles.drawerHeader}>
       <img src="/logo.svg" alt="Aspire logo" />
       <Typography color="#53738b" variant="subtitle2">
         Trusted way of banking for 3,000+ SMEs and startups in Singapore
       </Typography>
+      </div>
+     
       <List>
         {routes.map((route) => (
           <ListItemButton

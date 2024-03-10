@@ -13,10 +13,15 @@ $drawerWidth: 25%;
 }
 
 .drawer {
-  padding: 3em 0 3em 3em;
+
+  .drawerHeader {
+    padding: 3em 0 3em 3em;
+
+  }
 
   .listButton {
-    padding: 1.5em 0;
+    padding: 1.5em 3em;
+
     .listItem {
       padding-left: 1em;
     }

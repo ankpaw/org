@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import Cards from './routes/cards/cards';
 import Home from './routes/home/home';
+import MyCards from './routes/cards/mycards/mycards';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,17 @@ const router = createBrowserRouter([
       {
         path: '/cards',
         element: <Cards />,
+        children: [
+          {
+            index: true,
+            path: 'my-cards',
+            element: <MyCards />,
+          },
+          {
+            path: 'all',
+            element: <div>All Cards</div>,
+          },
+        ],
       },
       {
         path: '/payments',

@@ -1385,6 +1385,11 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.1.tgz#16308cea045f0fc777b6ff20a9f25474dd8293d2"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
+"@fontsource/open-sans@^5.0.26":
+  version "5.0.26"
+  resolved "https://registry.yarnpkg.com/@fontsource/open-sans/-/open-sans-5.0.26.tgz#9495b7763d2edfa723cbd54e255bf26d24ed7bb2"
+  integrity sha512-rdLire4IvoNUeP03R37r341ezqfj/l0I8An4MYwakOoSdaHgFhZRSDVCBl/yjW6TX79P8mJbLzA2riAicQV7zw==
+
 "@fontsource/roboto@^5.0.12":
   version "5.0.12"
   resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.0.12.tgz#418f7305a3be7fc567dd154db20090f7ece7fc6c"

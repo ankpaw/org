@@ -1,19 +1,40 @@
 .container {
-    padding: 2em 3em;
+    padding: 0 2em 3em;
+
+    .content {
+        margin-top: 1em;
+    }
 
     .currencyContainer {
         display: flex;
         margin-top: 1em;
 
         .chip {
-            background-color: #01D167;
-            border-radius: 0.5em;
-            padding: 1em 0.5em;
-            font-weight: 600;
-            font-size: 1em;
             margin-right: 1em;
+            margin-top: 0.25em;
+        }
+
+        .addBtn {
+            margin-left: auto;
         }
     }
 
+    .tab {
+        .tabItem {
+            text-transform: none;
+            color: #222222;
+            opacity: 30%;
+
+            &.selectedTabItem {
+                color: #222222;
+                opacity: 100%;
+                font-weight: 500;
+            }
+        }
+
+        .tabIndicator {
+            background-color: #21cefd;
+        }
+    }
 
 }
