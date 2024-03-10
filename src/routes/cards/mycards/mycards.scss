@@ -1,0 +1,24 @@
+.aspire-carousel {
+    .carousel-slider {
+        overflow: visible;
+
+        .control-dots {
+            position: absolute;
+            bottom: -2em;
+            left: 50%;
+            transform: translateX(-50%);
+
+            .dot {
+                background-color: #01D167;
+                opacity: 20%;
+            }
+
+            .selected {
+                width: 1em;
+                height: 0.5em;
+                border-radius: 2em;
+                opacity: 100%;
+            }
+        }
+    }
+}
