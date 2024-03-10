@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -32,7 +31,7 @@ const SideNav = ({ isDrawerOpen, setDrawerOpen }: SideNavProps) => {
       icon: HomeIcon,
     },
     {
-      path: '/cards',
+      path: '/cards/my-cards',
       name: 'Cards',
       icon: CardIcon,
     },
