@@ -5,9 +5,14 @@ import CustomButton from '../../components/custombutton/custombutton';
 import AddIcon from '../../icons/AddIcon';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import AddCardDialog from '../../components/addcarddialog/addcarddialog';
 const Cards = () => {
   const navigate = useNavigate();
   const [currentRoute, setCurrentRoute] = useState('my-cards');
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
   const handleChange = (event: React.ChangeEvent<any>, newValue: string) => {
     setCurrentRoute(newValue);
@@ -34,7 +39,7 @@ const Cards = () => {
           <Typography fontWeight={'600'} variant={'h5'}>
             3,000
           </Typography>
-          <CustomButton className={styles.addBtn} startIcon={<AddIcon />}>
+          <CustomButton onClick={handleClickOpen} className={styles.addBtn} startIcon={<AddIcon />}>
             New card
           </CustomButton>
         </div>
@@ -62,6 +67,7 @@ const Cards = () => {
       <div className={styles.content}>
         <Outlet />
       </div>
+      <AddCardDialog open={open} setOpen={setOpen} />
     </div>
   );
 };

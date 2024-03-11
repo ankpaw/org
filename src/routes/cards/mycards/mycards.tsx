@@ -35,6 +35,7 @@ const MyCards = () => {
   const [selectedCardIndex, setSelectedCardIndex] = useState<number>(0);
   const [transactions, setTransactions] = useState<AspireTransaction[]>([]);
 
+
   useEffect(() => {
     fetch('http://localhost:3001/my-cards')
       .then((response) => response.json())

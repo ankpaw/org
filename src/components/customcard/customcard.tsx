@@ -6,6 +6,8 @@ export interface AspireCard {
   name: string;
   cardNumber: string;
   cvv: string;
+  type: 'debit' | 'credit';
+  expiry: string;
 }
 interface CustomCardProps {
   isCardDetailsVisible: boolean;
@@ -52,7 +54,7 @@ const CustomCard = ({ isCardDetailsVisible, card }: CustomCardProps) => {
           variant="body2"
           sx={{ fontWeight: '500', marginBottom: '1em' }}
         >
-          <span>Thru: 12/25</span>
+          <span>Thru: {card.expiry}</span>
           <span>CVV: {maskCVV(card.cvv)}</span>
         </Typography>
         <div className={styles.cardHeader}>
