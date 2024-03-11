@@ -27,7 +27,11 @@ const CustomCard = ({ isCardDetailsVisible, card }: CustomCardProps) => {
   };
 
   return (
-    <Card className={styles.card}>
+    <Card
+      className={`${
+        card.freezed ? `${styles.card} ${styles.frozen}` : styles.card
+      }`}
+    >
       <CardContent>
         <div className={styles.cardHeader}>
           <img src="logo-white.svg" alt="aspire logo" />

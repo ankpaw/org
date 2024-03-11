@@ -2,6 +2,9 @@
     background-color: #01D167 !important;
     color: #fff !important;
     border-radius: 1em !important;
+    &.frozen {
+        opacity: 20%;
+    }
 
     .cardText {
         margin-bottom: 0.5em;
