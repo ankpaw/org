@@ -2,9 +2,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Avatar,
   Button,
-  Card,
-  CardContent,
   IconButton,
   Typography,
 } from '@mui/material';
@@ -15,22 +14,61 @@ import DownArrowIcon from '../../../icons/DownArrowIcon';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import './mycards.scss';
+import CustomCard, {
+  AspireCard,
+} from '../../../components/customcard/customcard';
 
-interface Card {
-  id: number;
-  name: string;
-  cardNumber: string;
-  cvv: string;
+interface CardDetails {
+  id: string;
+  accountHolder: string;
+  accountNumber: string;
+  branch: string;
+  ifsc: string;
+}
+
+interface Transaction {
+  id: string;
+  date: string;
+  amount: string;
+  merchant: string;
+  merchantIconCode: 0 | 1 | 2;
+  type: string;
+  cardType: 'credit card' | 'debit card';
 }
 
 const MyCards = () => {
   const [isCardDetailsVisible, setIsCardDetailsVisible] = useState(false);
-  const [cards, setCards] = useState<Card[]>([]);
+  const [cards, setCards] = useState<AspireCard[]>([]);
+  const [cardDetails, setCardDetails] = useState<CardDetails | null>(null);
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number>(0);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+  const transactionIconMap = [
+    {
+      color: '#009DFF1A',
+      src: 'file-storage.svg',
+    },
+    { color: '#00D6B51A', src: 'flights.svg' },
+    { color: '#F251951A', src: 'megaphone.svg' },
+  ];
+
   useEffect(() => {
     fetch('http://localhost:3001/my-cards')
       .then((response) => response.json())
       .then((data) => setCards(data));
   }, []);
+
+  useEffect(() => {
+    const selectedCardId = cards[selectedCardIndex]?.id;
+    selectedCardId &&
+      fetch(`http://localhost:3001/card-details/${selectedCardId}`)
+        .then((response) => response.json())
+        .then((data) => setCardDetails(data));
+    selectedCardId &&
+      fetch(`http://localhost:3001/transactions/${selectedCardId}`)
+        .then((response) => response.json())
+        .then((data) => setTransactions(data.transactions));
+  }, [selectedCardIndex, cards]);
 
   const actions = [
     { name: 'Freeze card', icon: 'freeze.svg' },
@@ -40,15 +78,7 @@ const MyCards = () => {
     { name: 'Cancel card', icon: 'deactivate.svg' },
   ];
 
-  const maskCardDetails = (cardNumber: string) => {
-    return isCardDetailsVisible
-      ? cardNumber
-      : '•••• •••• •••• ' + cardNumber.slice(-4);
-  };
-
-  const maskCVV = (cvv: string) => {
-    return isCardDetailsVisible ? cvv : '***';
-  };
+  
   return (
     <div className={styles.container}>
       <div className={styles.cardContainer}>
@@ -70,45 +100,15 @@ const MyCards = () => {
           showArrows={false}
           showStatus={false}
           className={'aspire-carousel'}
+          selectedItem={selectedCardIndex}
+          onChange={(index) => setSelectedCardIndex(index)}
         >
           {cards.map((card) => (
-            <div key={card.id}>
-              <Card className={styles.card}>
-                <CardContent>
-                  <div className={styles.cardHeader}>
-                    <img src="logo-white.svg" alt="aspire logo" />
-                  </div>
-                  <Typography
-                    className={styles.cardText}
-                    variant="h5"
-                    sx={{ fontWeight: '600', marginBottom: '2em' }}
-                  >
-                    {card.name}
-                  </Typography>
-                  <Typography
-                    className={styles.cardText}
-                    variant="h6"
-                    sx={{
-                      fontWeight: '500',
-                      letterSpacing: '0.5em',
-                      marginBottom: '1em',
-                    }}
-                  >
-                    {maskCardDetails(card.cardNumber)}
-                  </Typography>
-                  <Typography
-                    className={styles.cardText}
-                    variant="body2"
-                    sx={{ fontWeight: '500', marginBottom: '1em' }}
-                  >
-                    <span>Thru: 12/25</span>
-                    <span>CVV: {maskCVV(card.cvv)}</span>
-                  </Typography>
-                  <div className={styles.cardHeader}>
-                    <img src="visa-logo.svg" alt="aspire logo" />
-                  </div>
-                </CardContent>
-              </Card>
+            <div key={card?.id}>
+              <CustomCard
+                isCardDetailsVisible={isCardDetailsVisible}
+                card={card}
+              />
             </div>
           ))}
         </Carousel>
@@ -137,14 +137,17 @@ const MyCards = () => {
             <Typography sx={{ marginLeft: '0.5em' }}>Card details</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>Name: Mark Henry</Typography>
-            <Typography>Account number: 1234 5678 9101 1121</Typography>
-            <Typography>Branch: 1234 5678 9101 1121</Typography>
-            <Typography>IFSC Code: 1234 5678 9101 1121</Typography>
+            <Typography>Name: {cardDetails?.accountHolder}</Typography>
+            <Typography>
+              Account number: {cardDetails?.accountNumber}
+            </Typography>
+            <Typography>Branch: {cardDetails?.branch}</Typography>
+            <Typography>IFSC Code: {cardDetails?.ifsc}</Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion className={styles.accordion}>
+        <Accordion defaultExpanded className={styles.accordion}>
           <AccordionSummary
+            className={styles.accordionSummary}
             expandIcon={<DownArrowIcon />}
             aria-controls="panel1b-content"
             id="panel1b-header"
@@ -154,11 +157,97 @@ const MyCards = () => {
               Recent Transactions
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography>Name: Mark Henry</Typography>
-            <Typography>Account number: 1234 5678 9101 1121</Typography>
-            <Typography>Branch: 1234 5678 9101 1121</Typography>
-            <Typography>IFSC Code: 1234 5678 9101 1121</Typography>
+          <AccordionDetails className={styles.accordionDetails}>
+            {transactions.map(
+              (transaction) => {
+                return (
+                  <div key={transaction.id} className={styles.transaction}>
+                    <Avatar
+                      sx={{
+                        backgroundColor:
+                          transactionIconMap[transaction.merchantIconCode]
+                            .color,
+                        height: '50px',
+                        width: '50px',
+                        marginRight: '1em',
+                      }}
+                    >
+                      <img
+                        src={
+                          transactionIconMap[transaction.merchantIconCode].src
+                        }
+                        alt="merchant"
+                        className={styles.merchantIcon}
+                      />
+                    </Avatar>
+                    <div className={styles.transactionDetails}>
+                      <div className={styles.transactionTitle}>
+                        <Typography
+                          variant="body1"
+                          sx={{ fontWeight: '500', marginBottom: '0.25em' }}
+                        >
+                          {transaction.merchant}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          sx={{
+                            fontWeight: '600',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            color:
+                              transaction.type === 'credit'
+                                ? '#01D167'
+                                : '#FF0000',
+                          }}
+                        >
+                          {transaction.type === 'credit' ? '+ ' : '- '}
+                          {`S$ ${transaction.amount}`}
+                        </Typography>
+                      </div>
+                      <Typography
+                        variant="body2"
+                        sx={{ marginBottom: '0.5em' }}
+                      >
+                        {new Date(transaction.date).toLocaleDateString(
+                          'en-GB',
+                          {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                          }
+                        )}
+                      </Typography>
+                      <div className={styles.transactionType}>
+                        <Avatar
+                          sx={{
+                            backgroundColor: '#325BAF',
+                            borderRadius: '40%',
+                            height: '1em',
+                            width: '1.25em',
+                            marginRight: '0.5em',
+                          }}
+                        >
+                          <img
+                            alt="business-and-finance-logo"
+                            src="business-and-finance.svg"
+                          />
+                        </Avatar>
+                        <Typography
+                          variant={'caption'}
+                          sx={{ fontWeight: '500' }}
+                        >
+                          {`${transaction.type} ${
+                            transaction.cardType === 'credit card'
+                              ? 'Credit card'
+                              : 'Debit card'
+                          }`}
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                );
+              } /* render transaction */
+            )}
           </AccordionDetails>
         </Accordion>
         <Button

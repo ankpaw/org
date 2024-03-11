@@ -18,5 +18,62 @@
             "cardNumber": "3456 7890 1234 5678",
             "cvv": "345"
         }
+    ],
+    "card-details": [
+        {
+            "id": "1",
+            "accountHolder": "Mark Henry",
+            "accountNumber": "1234 5678 9101 1121",
+            "branch": "New Delhi",
+            "ifsc": "ASP 1234"
+        },
+        {
+            "id": "2",
+            "accountHolder": "John Doe",
+            "accountNumber": "1234 6789 9101 2022",
+            "branch": "Mumbai",
+            "ifsc": "ASP 1121"
+        },
+        {
+            "id": "3",
+            "accountHolder": "Jane Doe",
+            "accountNumber": "6780 5678 9101 2020",
+            "branch": "Kolkata",
+            "ifsc": "ASP 5678"
+        }
+    ],
+    "transactions": [
+        {
+            "id": "1",
+            "transactions": [
+                {
+                    "id": "1234",
+                    "merchant": "Amazon",
+                    "merchantIconCode": 0,
+                    "amount": "1000",
+                    "date": "12/12/2019",
+                    "type": "Refund on",
+                    "cardType": "debit Card"
+                },
+                {
+                    "id": "1235",
+                    "merchant": "Cleartrip",
+                    "merchantIconCode": 1,
+                    "amount": "20000",
+                    "date": "12/12/2019",
+                    "type": "Charged to",
+                    "cardType": "debit Card"
+                },
+                {
+                    "id": "1236",
+                    "merchant": "Myntra",
+                    "merchantIconCode": 2,
+                    "amount": "3000",
+                    "date": "12/12/2019",
+                    "type": "Charged to",
+                    "cardType": "debit Card"
+                }
+            ]
+        }
     ]
 }
