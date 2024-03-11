@@ -40,6 +40,7 @@ const AddCardDialog = ({ open, setOpen, setRefreshCards }: AddCardDialogProps) =
                     "cvv": Array.from({length: 3}, () => Math.floor(Math.random() * 10)).join(''),
                     "type": ["credit", "debit"][Math.floor(Math.random() * 2)],
                     "expiry": `${Math.floor(Math.random() * 12) + 1}/${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`,
+                    "freezed": false,
                 }),
             });
 

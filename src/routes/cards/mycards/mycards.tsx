@@ -47,7 +47,7 @@ const MyCards = () => {
         setCards(data);
         setRefreshCards(false);
       });
-  }, [refreshCards]);
+  }, [refreshCards, setRefreshCards]);
 
   useEffect(() => {
     const selectedCardId = cards[selectedCardIndex]?.id;
@@ -61,8 +61,24 @@ const MyCards = () => {
         .then((data) => setTransactions(data.transactions));
   }, [selectedCardIndex, cards]);
 
+  const toggleCardFreezeStatus = () => {
+    const selectedCardId = cards[selectedCardIndex]?.id;
+    selectedCardId &&
+      fetch(`http://localhost:3001/my-cards/${selectedCardId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ freezed: !cards[selectedCardIndex].freezed }),
+      }).then(() => setRefreshCards(true));
+  };
+
   const actions = [
-    { name: 'Freeze card', icon: 'freeze.svg' },
+    {
+      name: `${cards[selectedCardIndex]?.freezed ? 'Unfreeze' : 'Freeze'} card`,
+      icon: 'freeze.svg',
+      onClick: toggleCardFreezeStatus,
+    },
     { name: 'Set spend limit', icon: 'set-spend-limit.svg' },
     { name: 'Add to Gpay', icon: 'gpay.svg' },
     { name: 'Replace card', icon: 'replace.svg' },
@@ -108,6 +124,7 @@ const MyCards = () => {
               key={`${action.name}-${index}`}
               icon={action.icon}
               name={action.name}
+              onClick={action?.onClick}
             />
           ))}
         </div>

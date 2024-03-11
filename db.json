@@ -1,28 +1,31 @@
 {
   "my-cards": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Mark Henry",
       "cardNumber": "1234 5678 9012 3456",
       "cvv": "123",
       "expiry": "12/20",
-      "type": "debit"
+      "type": "debit",
+      "freezed": false
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "John Doe",
       "cardNumber": "2345 6789 0123 4567",
       "cvv": "234",
       "expiry": "04/21",
-      "type": "credit"
+      "type": "credit",
+      "freezed": false
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Jane Doe",
       "cardNumber": "3456 7890 1234 5678",
       "cvv": "345",
       "expiry": "12/22",
-      "type": "debit"
+      "type": "debit",
+      "freezed": false
     }
   ],
   "card-details": [
@@ -75,6 +78,70 @@
           "merchant": "Myntra",
           "merchantIconCode": 2,
           "amount": "3000",
+          "date": "12/12/2019",
+          "type": "Charged to",
+          "cardType": "debit Card"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "transactions": [
+        {
+          "id": "1237",
+          "merchant": "Hamleys",
+          "merchantIconCode": 0,
+          "amount": "2000",
+          "date": "04/05/2019",
+          "type": "Refund on",
+          "cardType": "debit Card"
+        },
+        {
+          "id": "1239",
+          "merchant": "Flipkart",
+          "merchantIconCode": 2,
+          "amount": "4230",
+          "date": "04/06/2023",
+          "type": "Charged to",
+          "cardType": "debit Card"
+        },
+        {
+          "id": "1238",
+          "merchant": "Trivago",
+          "merchantIconCode": 1,
+          "amount": "32000",
+          "date": "12/21/2024",
+          "type": "Charged to",
+          "cardType": "debit Card"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "transactions": [
+        {
+          "id": "1241",
+          "merchant": "Skyscanner",
+          "merchantIconCode": 1,
+          "amount": "20000",
+          "date": "12/12/2019",
+          "type": "Charged to",
+          "cardType": "debit Card"
+        },
+        {
+          "id": "1240",
+          "merchant": "Paytm",
+          "merchantIconCode": 0,
+          "amount": "100",
+          "date": "12/12/2019",
+          "type": "Refund on",
+          "cardType": "debit Card"
+        },
+        {
+          "id": "1242",
+          "merchant": "AJIO",
+          "merchantIconCode": 2,
+          "amount": "300",
           "date": "12/12/2019",
           "type": "Charged to",
           "cardType": "debit Card"

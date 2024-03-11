@@ -2,12 +2,13 @@ import { Card, CardContent, Typography } from '@mui/material';
 import styles from './customcard.module.scss';
 
 export interface AspireCard {
-  id: number;
+  id: string;
   name: string;
   cardNumber: string;
   cvv: string;
   type: 'debit' | 'credit';
   expiry: string;
+  freezed: boolean;
 }
 interface CustomCardProps {
   isCardDetailsVisible: boolean;
