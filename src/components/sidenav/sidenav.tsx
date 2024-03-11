@@ -3,7 +3,7 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
-import styles from './sideNav.module.scss'; // Import the SCSS module
+import styles from './sidenav.module.scss'; // Import the SCSS module
 import HomeIcon from '../../icons/HomeIcon';
 import CardIcon from '../../icons/CardIcon';
 import PaymentsIcon from '../../icons/PaymentsIcon';
