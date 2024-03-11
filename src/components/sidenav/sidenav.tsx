@@ -2,7 +2,7 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import styles from './sidenav.module.scss'; // Import the SCSS module
 import HomeIcon from '../../icons/HomeIcon';
 import CardIcon from '../../icons/CardIcon';
@@ -16,8 +16,6 @@ interface SideNavProps {
   isDrawerOpen: boolean;
 }
 const SideNav = ({ isDrawerOpen, setDrawerOpen }: SideNavProps) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const location = useLocation();
 
   const handleDrawerToggle = () => {
@@ -55,12 +53,12 @@ const SideNav = ({ isDrawerOpen, setDrawerOpen }: SideNavProps) => {
   const drawer = (
     <div className={styles.drawer}>
       <div className={styles.drawerHeader}>
-      <img src="/logo.svg" alt="Aspire logo" />
-      <Typography color="#53738b" variant="subtitle2">
-        Trusted way of banking for 3,000+ SMEs and startups in Singapore
-      </Typography>
+        <img src="/logo.svg" alt="Aspire logo" />
+        <Typography color="#53738b" variant="subtitle2">
+          Trusted way of banking for 3,000+ SMEs and startups in Singapore
+        </Typography>
       </div>
-     
+
       <List>
         {routes.map((route) => (
           <ListItemButton
@@ -89,34 +87,32 @@ const SideNav = ({ isDrawerOpen, setDrawerOpen }: SideNavProps) => {
   );
 
   return (
-    !isMobile && (
-      <div className={styles.root}>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerToggle}
-          className={styles.menuButton}
+    <div className={styles.root}>
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={handleDrawerToggle}
+        className={styles.menuButton}
+      >
+        <MenuIcon />
+      </IconButton>
+      <nav className={styles.nav} aria-label="nav links">
+        <Drawer
+          variant="permanent"
+          anchor="left"
+          open={isDrawerOpen}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: styles.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true,
+          }}
         >
-          <MenuIcon />
-        </IconButton>
-        <nav className={styles.nav} aria-label="nav links">
-          <Drawer
-            variant="permanent"
-            anchor="left"
-            open={isDrawerOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: styles.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true,
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </nav>
-      </div>
-    )
+          {drawer}
+        </Drawer>
+      </nav>
+    </div>
   );
 };
 
