@@ -14,7 +14,7 @@
       "cardNumber": "2345 6789 0123 4567",
       "cvv": "234",
       "expiry": "04/21",
-      "type":"credit"
+      "type": "credit"
     },
     {
       "id": 3,

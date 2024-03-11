@@ -9,8 +9,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 interface AddCardDialogProps {
   open: boolean;
   setOpen: (value: boolean) => void;
+  setRefreshCards: (value: boolean) => void;
 }
-const AddCardDialog = ({ open, setOpen }: AddCardDialogProps) => {
+const AddCardDialog = ({ open, setOpen, setRefreshCards }: AddCardDialogProps) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -45,6 +46,7 @@ const AddCardDialog = ({ open, setOpen }: AddCardDialogProps) => {
             if (response.ok) {
                 // Handle successful response
                 alert('Card added successfully');
+                setRefreshCards(true);
             } else {
                 // Handle error response
                 alert('Failed to add card');

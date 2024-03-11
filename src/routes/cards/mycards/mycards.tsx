@@ -19,6 +19,7 @@ import Transaction, {
   AspireTransaction,
 } from '../../../components/transaction/transaction';
 import ActionButton from '../../../components/actionbutton/actionbutton';
+import { useOutletContext } from 'react-router-dom';
 
 interface CardDetails {
   id: string;
@@ -34,13 +35,19 @@ const MyCards = () => {
   const [cardDetails, setCardDetails] = useState<CardDetails | null>(null);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number>(0);
   const [transactions, setTransactions] = useState<AspireTransaction[]>([]);
-
+  const [refreshCards, setRefreshCards] = useOutletContext() as [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ];
 
   useEffect(() => {
     fetch('http://localhost:3001/my-cards')
       .then((response) => response.json())
-      .then((data) => setCards(data));
-  }, []);
+      .then((data) => {
+        setCards(data);
+        setRefreshCards(false);
+      });
+  }, [refreshCards]);
 
   useEffect(() => {
     const selectedCardId = cards[selectedCardIndex]?.id;
