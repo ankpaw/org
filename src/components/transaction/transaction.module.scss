@@ -1,0 +1,23 @@
+.transaction {
+    display: flex;
+    border-bottom: 1px solid #F5F5F5;
+    padding: 1em 0;
+
+    .transactionDetails {
+        width: 100%;
+
+        .transactionTitle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+
+        }
+
+        .transactionType {
+            display: flex;
+            color: #325BAF;
+            margin-bottom: 0.5em;
+        }
+    }
+}
