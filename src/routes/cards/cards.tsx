@@ -1,4 +1,11 @@
-import { Box, Tab, Tabs, Typography, useMediaQuery, useTheme} from '@mui/material';
+import {
+  Box,
+  Tab,
+  Tabs,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import styles from './cards.module.scss';
 import CustomChip from '../../components/customchip/customchip';
 import CustomButton from '../../components/custombutton/custombutton';
@@ -37,50 +44,59 @@ const Cards = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-      <div className={styles.mobileLogoContainer}>
-          <img src='mobile-logo.svg' alt='cards' />
+        <div className={styles.mobileLogoContainer}>
+          <img src="mobile-logo.svg" alt="cards" />
         </div>
-      <div className={styles.balanceContainer}>
-        <Typography sx={isMobile ? {
-          color: '#FFF'
-        }: {}} variant={'body1'}>Available balance</Typography>
-        <div className={styles.currencyContainer}>
-          <CustomChip className={styles.chip} label="S$" />
-          <Typography fontWeight={'600'} variant={'h5'}>
-            3,000
-          </Typography>
-          <CustomButton
-            isMobile={isMobile}
-            onClick={handleClickOpen}
-            className={styles.addBtn}
-            startIcon={<AddIcon fillB={isMobile ? '#23CEFD' : '#fff'} />}
+        <div className={styles.balanceContainer}>
+          <Typography
+            sx={
+              isMobile
+                ? {
+                    color: '#FFF',
+                  }
+                : {}
+            }
+            variant={'body1'}
           >
-            New card
-          </CustomButton>
+            Available balance
+          </Typography>
+          <div className={styles.currencyContainer}>
+            <CustomChip className={styles.chip} label="S$" />
+            <Typography fontWeight={'600'} variant={'h5'}>
+              3,000
+            </Typography>
+            <CustomButton
+              isMobile={isMobile}
+              onClick={handleClickOpen}
+              className={styles.addBtn}
+              startIcon={<AddIcon fillB={isMobile ? '#23CEFD' : '#fff'} />}
+            >
+              New card
+            </CustomButton>
+          </div>
         </div>
-      </div>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
-          className={styles.tab}
-          onChange={handleChange}
-          value={currentRoute}
-          aria-label="Cards"
-          TabIndicatorProps={{
-            className: styles.tabIndicator,
-          }}
-        >
-          {tabs.map((tab, index) => (
-            <Tab
-              key={index}
-              className={`${styles.tabItem} ${
-                currentRoute === tab.value ? styles.selectedTabItem : ''
-              }`}
-              label={tab.label}
-              value={tab.value}
-            />
-          ))}
-        </Tabs>
-      </Box>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs
+            className={styles.tab}
+            onChange={handleChange}
+            value={currentRoute}
+            aria-label="Cards"
+            TabIndicatorProps={{
+              className: styles.tabIndicator,
+            }}
+          >
+            {tabs.map((tab, index) => (
+              <Tab
+                key={index}
+                className={`${styles.tabItem} ${
+                  currentRoute === tab.value ? styles.selectedTabItem : ''
+                }`}
+                label={tab.label}
+                value={tab.value}
+              />
+            ))}
+          </Tabs>
+        </Box>
       </div>
       <div className={styles.content}>
         <Outlet context={[refreshCards, setRefreshCards]} />

@@ -16,7 +16,11 @@ interface CustomCardProps {
   isMobile?: boolean;
 }
 
-const CustomCard = ({ isCardDetailsVisible, card, isMobile}: CustomCardProps) => {
+const CustomCard = ({
+  isCardDetailsVisible,
+  card,
+  isMobile,
+}: CustomCardProps) => {
   const maskCardDetails = (cardNumber: string) => {
     return isCardDetailsVisible
       ? cardNumber

@@ -13,15 +13,16 @@
     .cardContainer {
         width: 50%;
         padding-right: 2em;
+
         @media (max-width: 768px) {
-           width: auto;
-           padding-right: 0;
+            width: auto;
+            padding-right: 0;
         }
 
         .card {
             @media (max-width: 768px) {
                 padding: 0 1em;
-             }
+            }
         }
 
         .viewBtnContainer {
@@ -39,7 +40,7 @@
                 border-radius: 1em 1em 0 0;
                 padding: 1.5em 1em;
                 margin-bottom: -0.5em;
-             }
+            }
 
             div {
                 text-align: center;
@@ -49,6 +50,7 @@
 
     .statementContainer {
         width: 50%;
+
         @media (max-width: 768px) {
             width: auto;
         }
@@ -61,13 +63,14 @@
             @media (max-width: 768px) {
                 margin: 0;
             }
-    
+
 
             .accordionSummary {
                 display: flex;
                 justify-content: space-between;
+
                 @media (max-width: 768px) {
-                   padding: 1em;
+                    padding: 1em;
                 }
 
                 .accordionTitle {

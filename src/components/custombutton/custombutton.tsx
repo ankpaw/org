@@ -8,9 +8,9 @@ const CustomButton = ({
     sx={
       isMobile
         ? {
-          textTransform: 'none',
-          color: '#23CEFD'
-        }
+            textTransform: 'none',
+            color: '#23CEFD',
+          }
         : {
             backgroundColor: '#325BAF',
             textTransform: 'none',
