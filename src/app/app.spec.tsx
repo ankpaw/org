@@ -1,15 +1,25 @@
 import { render } from '@testing-library/react';
-
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './app';
 
 describe('App', () => {
-  it('should render successfully', () => {
-    const { baseElement } = render(<App />);
-    expect(baseElement).toBeTruthy();
-  });
+  describe('App', () => {
+    it('should render successfully', () => {
+      const { baseElement } = render(
+        <Router>
+          <App />
+        </Router>
+      );
+      expect(baseElement).toBeTruthy();
+    });
 
-  it('should have a greeting as the title', () => {
-    const { getByText } = render(<App />);
-    expect(getByText(/Welcome org/gi)).toBeTruthy();
+    it('should have sidenav home nav text', () => {
+      const { getByText } = render(
+        <Router>
+          <App />
+        </Router>
+      );
+      expect(getByText(/Home/gi)).toBeTruthy();
+    });
   });
 });
