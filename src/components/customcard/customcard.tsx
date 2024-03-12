@@ -13,9 +13,10 @@ export interface AspireCard {
 interface CustomCardProps {
   isCardDetailsVisible: boolean;
   card: AspireCard;
+  isMobile?: boolean;
 }
 
-const CustomCard = ({ isCardDetailsVisible, card }: CustomCardProps) => {
+const CustomCard = ({ isCardDetailsVisible, card, isMobile}: CustomCardProps) => {
   const maskCardDetails = (cardNumber: string) => {
     return isCardDetailsVisible
       ? cardNumber
@@ -38,14 +39,14 @@ const CustomCard = ({ isCardDetailsVisible, card }: CustomCardProps) => {
         </div>
         <Typography
           className={styles.cardText}
-          variant="h5"
+          variant={isMobile ? 'h6' : 'h5'}
           sx={{ fontWeight: '600', marginBottom: '2em' }}
         >
           {card.name}
         </Typography>
         <Typography
           className={styles.cardText}
-          variant="h6"
+          variant={isMobile ? 'subtitle1' : 'h6'}
           sx={{
             fontWeight: '500',
             letterSpacing: '0.5em',
@@ -57,7 +58,7 @@ const CustomCard = ({ isCardDetailsVisible, card }: CustomCardProps) => {
         <Typography
           className={styles.cardText}
           variant="body2"
-          sx={{ fontWeight: '500', marginBottom: '1em' }}
+          sx={{ fontWeight: '600', marginBottom: '1em' }}
         >
           <span>Thru: {card.expiry}</span>
           <span>CVV: {maskCVV(card.cvv)}</span>

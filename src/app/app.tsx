@@ -19,7 +19,7 @@ export function App() {
       {!isMobile && (
         <SideNav isDrawerOpen={isDrawerOpen} setDrawerOpen={setIsDrawerOpen} />
       )}
-      <div className={styles.shiftTextRight}>
+      <div className={!isMobile ? styles.shiftTextRight : ''}>
         <Outlet />
       </div>
     </div>

@@ -1,9 +1,23 @@
 import { Button, ButtonProps } from '@mui/material';
 
-const CustomButton = (props: ButtonProps) => (
-  <Button sx={{
-    backgroundColor: '#325BAF',
-    textTransform: 'none',
-  }} variant={'contained'} {...props}></Button>
+const CustomButton = ({
+  isMobile,
+  ...props
+}: ButtonProps & { isMobile: boolean }) => (
+  <Button
+    sx={
+      isMobile
+        ? {
+          textTransform: 'none',
+          color: '#23CEFD'
+        }
+        : {
+            backgroundColor: '#325BAF',
+            textTransform: 'none',
+          }
+    }
+    variant={isMobile ? 'text' : 'contained'}
+    {...props}
+  ></Button>
 );
 export default CustomButton;

@@ -4,6 +4,8 @@ import {
   AccordionSummary,
   Button,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import styles from './mycards.module.scss';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -30,6 +32,8 @@ interface CardDetails {
 }
 
 const MyCards = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [isCardDetailsVisible, setIsCardDetailsVisible] = useState(false);
   const [cards, setCards] = useState<AspireCard[]>([]);
   const [cardDetails, setCardDetails] = useState<CardDetails | null>(null);
@@ -88,36 +92,51 @@ const MyCards = () => {
   return (
     <div className={styles.container}>
       <div className={styles.cardContainer}>
-        <div className={styles.viewBtnContainer}>
-          <Button
-            sx={{
-              color: '#01D167',
-              textTransform: 'none',
-              marginLeft: 'auto',
-            }}
-            startIcon={<RemoveRedEye fill="#01D167" />}
-            onClick={() => setIsCardDetailsVisible(!isCardDetailsVisible)}
+        <div className={styles.card}>
+          <div className={styles.viewBtnContainer}>
+            <Button
+              sx={
+                isMobile
+                  ? {
+                      color: '#01D167',
+                      textTransform: 'none',
+                      marginLeft: 'auto',
+                      background: '#FFF',
+                      paddingBottom: '1em',
+                      marginBottom: '-1em',
+                    }
+                  : {
+                      color: '#01D167',
+                      textTransform: 'none',
+                      marginLeft: 'auto',
+                    }
+              }
+              startIcon={<RemoveRedEye fill="#01D167" />}
+              onClick={() => setIsCardDetailsVisible(!isCardDetailsVisible)}
+            >
+              {isCardDetailsVisible ? 'Hide' : 'Show'} card number
+            </Button>
+          </div>
+          <Carousel
+            showThumbs={false}
+            showArrows={false}
+            showStatus={false}
+            className={'aspire-carousel'}
+            selectedItem={selectedCardIndex}
+            onChange={(index) => setSelectedCardIndex(index)}
           >
-            {isCardDetailsVisible ? 'Hide' : 'Show'} card number
-          </Button>
+            {cards.map((card) => (
+              <div key={card?.id}>
+                <CustomCard
+                  isCardDetailsVisible={isCardDetailsVisible}
+                  card={card}
+                  isMobile={isMobile}
+                />
+              </div>
+            ))}
+          </Carousel>
         </div>
-        <Carousel
-          showThumbs={false}
-          showArrows={false}
-          showStatus={false}
-          className={'aspire-carousel'}
-          selectedItem={selectedCardIndex}
-          onChange={(index) => setSelectedCardIndex(index)}
-        >
-          {cards.map((card) => (
-            <div key={card?.id}>
-              <CustomCard
-                isCardDetailsVisible={isCardDetailsVisible}
-                card={card}
-              />
-            </div>
-          ))}
-        </Carousel>
+
         <div className={styles.btnGroup}>
           {actions.map((action, index) => (
             <ActionButton

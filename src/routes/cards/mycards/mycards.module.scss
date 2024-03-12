@@ -4,13 +4,28 @@
     display: flex;
     padding: 2em;
 
+    @media (max-width: 768px) {
+        border: none;
+        display: block;
+        padding: 0;
+    }
+
     .cardContainer {
         width: 50%;
         padding-right: 2em;
+        @media (max-width: 768px) {
+           width: auto;
+           padding-right: 0;
+        }
+
+        .card {
+            @media (max-width: 768px) {
+                padding: 0 1em;
+             }
+        }
 
         .viewBtnContainer {
             display: flex;
-
         }
 
         .btnGroup {
@@ -20,6 +35,12 @@
             padding: 0.5em 1em;
             margin-top: 5em;
 
+            @media (max-width: 768px) {
+                border-radius: 1em 1em 0 0;
+                padding: 1.5em 1em;
+                margin-bottom: -0.5em;
+             }
+
             div {
                 text-align: center;
             }
@@ -28,15 +49,26 @@
 
     .statementContainer {
         width: 50%;
+        @media (max-width: 768px) {
+            width: auto;
+        }
 
         .accordion {
             background-color: #F5F9FF;
             color: #0C365A;
             padding: 0;
 
+            @media (max-width: 768px) {
+                margin: 0;
+            }
+    
+
             .accordionSummary {
                 display: flex;
                 justify-content: space-between;
+                @media (max-width: 768px) {
+                   padding: 1em;
+                }
 
                 .accordionTitle {
                     font-size: 1.5em;

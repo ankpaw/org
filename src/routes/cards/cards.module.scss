@@ -1,11 +1,39 @@
 .container {
     padding: 0 2em 3em;
 
+    @media (max-width: 768px) {
+        background-color: #0C365A;
+        padding: 0;
+    }
+
+    .mobileLogoContainer {
+        display: none;
+
+        @media (max-width: 768px) {
+            display: flex;
+
+            img {
+                margin-left: auto;
+                padding: 1em;
+            }
+        }
+
+    }
+
+    .header {
+        @media (max-width: 768px) {
+            padding: 0 1em;
+        }
+    }
+
     .content {
         margin-top: 1em;
     }
 
     .currencyContainer {
+        @media (max-width: 768px) {
+            color: #fff;
+        }
         display: flex;
         margin-top: 1em;
 
@@ -24,11 +52,17 @@
             text-transform: none;
             color: #222222;
             opacity: 30%;
+            @media (max-width: 768px) {
+                color: #fff;
+            }
 
             &.selectedTabItem {
                 color: #222222;
                 opacity: 100%;
                 font-weight: 600;
+                @media (max-width: 768px) {
+                    color: #fff;
+                }
             }
         }
 
