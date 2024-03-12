@@ -11,7 +11,11 @@ interface AddCardDialogProps {
   setOpen: (value: boolean) => void;
   setRefreshCards: (value: boolean) => void;
 }
-const AddCardDialog = ({ open, setOpen, setRefreshCards }: AddCardDialogProps) => {
+const AddCardDialog = ({
+  open,
+  setOpen,
+  setRefreshCards,
+}: AddCardDialogProps) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -25,37 +29,43 @@ const AddCardDialog = ({ open, setOpen, setRefreshCards }: AddCardDialogProps) =
         onSubmit: async (event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
-          const formJson = Object.fromEntries((formData).entries());
+          const formJson = Object.fromEntries(formData.entries());
           const cardName = formJson.cardName;
-        try {
+          try {
             const response = await fetch('http://localhost:3001/my-cards', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 
-                    "id": new Date().getTime().toString(),
-                    "name": cardName,
-                    "cardNumber": Array.from({length: 4}, () => Math.floor(1000 + Math.random() * 9000)).join(' '),
-                    "cvv": Array.from({length: 3}, () => Math.floor(Math.random() * 10)).join(''),
-                    "type": ["credit", "debit"][Math.floor(Math.random() * 2)],
-                    "expiry": `${Math.floor(Math.random() * 12) + 1}/${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`,
-                    "freezed": false,
-                }),
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                id: new Date().getTime().toString(),
+                name: cardName,
+                cardNumber: Array.from({ length: 4 }, () =>
+                  Math.floor(1000 + Math.random() * 9000)
+                ).join(' '),
+                cvv: Array.from({ length: 3 }, () =>
+                  Math.floor(Math.random() * 10)
+                ).join(''),
+                type: ['credit', 'debit'][Math.floor(Math.random() * 2)],
+                expiry: `${Math.floor(Math.random() * 12) + 1}/${Math.floor(
+                  Math.random() * 10
+                )}${Math.floor(Math.random() * 10)}`,
+                freezed: false,
+              }),
             });
 
             if (response.ok) {
-                // Handle successful response
-                alert('Card added successfully');
-                setRefreshCards(true);
+              // Handle successful response
+              alert('Card added successfully');
+              setRefreshCards(true);
             } else {
-                // Handle error response
-                alert('Failed to add card');
+              // Handle error response
+              alert('Failed to add card');
             }
-        } catch (error) {
+          } catch (error) {
             // Handle network or other errors
             console.error('An error occurred', error);
-        }
+          }
           handleClose();
         },
       }}
