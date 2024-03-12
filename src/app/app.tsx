@@ -8,6 +8,7 @@ import SideNav from '../components/sidenav/sidenav';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
+import BottomNav from '../components/bottomnav/bottomnav';
 
 export function App() {
   const theme = useTheme();
@@ -19,9 +20,10 @@ export function App() {
       {!isMobile && (
         <SideNav isDrawerOpen={isDrawerOpen} setDrawerOpen={setIsDrawerOpen} />
       )}
-      <div className={!isMobile ? styles.shiftTextRight : ''}>
+      <div className={!isMobile ? styles.shiftTextRight : styles.marginBottom}>
         <Outlet />
       </div>
+      {isMobile && <BottomNav />}
     </div>
   );
 }
