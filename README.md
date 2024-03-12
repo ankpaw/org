@@ -31,3 +31,10 @@ npm run build
 Navigate to the cards route from the navigation to see the cards page coding challenge
 
 For the BE APIs, I have used json server deployed on render (Since, it's a free tier server, it spins down on inactivity and might take some time to spin up again.)
+
+# Design Resources
+
+Provided design resources for both desktop and mobile versions of the application. You can view these resources using the links below:
+
+- **Desktop Design**: [View Design](https://xd.adobe.com/view/80c753f2-db2f-4dfc-b6c2-ce39a4c787f0-d594/screen/7d8639be-16a2-4dc6-9ddc-c3bcd8d8f1ee/)
+- **Mobile Design**: [View Design](https://xd.adobe.com/view/80c753f2-db2f-4dfc-b6c2-ce39a4c787f0-d594/specs/)
