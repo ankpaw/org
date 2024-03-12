@@ -15,7 +15,7 @@ const Cards = () => {
     setOpen(true);
   };
 
-  const handleChange = (event: React.ChangeEvent<any>, newValue: string) => {
+  const handleChange = (event: React.ChangeEvent, newValue: string) => {
     setCurrentRoute(newValue);
     navigate(`${newValue.replace(/\s+/g, '-').toLowerCase()}`);
   };

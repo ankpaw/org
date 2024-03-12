@@ -25,7 +25,7 @@ const AddCardDialog = ({ open, setOpen, setRefreshCards }: AddCardDialogProps) =
         onSubmit: async (event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
-          const formJson = Object.fromEntries((formData as any).entries());
+          const formJson = Object.fromEntries((formData).entries());
           const cardName = formJson.cardName;
         try {
             const response = await fetch('http://localhost:3001/my-cards', {
