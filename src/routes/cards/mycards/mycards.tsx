@@ -45,7 +45,7 @@ const MyCards = () => {
   ];
 
   useEffect(() => {
-    fetch('http://localhost:3001/my-cards')
+    fetch('https://render-json-server-1ojc.onrender.com/my-cards')
       .then((response) => response.json())
       .then((data) => {
         setCards(data);
@@ -56,11 +56,11 @@ const MyCards = () => {
   useEffect(() => {
     const selectedCardId = cards[selectedCardIndex]?.id;
     selectedCardId &&
-      fetch(`http://localhost:3001/card-details/${selectedCardId}`)
+      fetch(`https://render-json-server-1ojc.onrender.com/card-details/${selectedCardId}`)
         .then((response) => response.json())
         .then((data) => setCardDetails(data));
     selectedCardId &&
-      fetch(`http://localhost:3001/transactions/${selectedCardId}`)
+      fetch(`https://render-json-server-1ojc.onrender.com/transactions/${selectedCardId}`)
         .then((response) => response.json())
         .then((data) => setTransactions(data.transactions));
   }, [selectedCardIndex, cards]);
@@ -68,7 +68,7 @@ const MyCards = () => {
   const toggleCardFreezeStatus = () => {
     const selectedCardId = cards[selectedCardIndex]?.id;
     selectedCardId &&
-      fetch(`http://localhost:3001/my-cards/${selectedCardId}`, {
+      fetch(`https://render-json-server-1ojc.onrender.com/my-cards/${selectedCardId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

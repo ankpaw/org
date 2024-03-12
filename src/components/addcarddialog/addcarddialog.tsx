@@ -32,7 +32,7 @@ const AddCardDialog = ({
           const formJson = Object.fromEntries(formData.entries());
           const cardName = formJson.cardName;
           try {
-            const response = await fetch('http://localhost:3001/my-cards', {
+            const response = await fetch('https://render-json-server-1ojc.onrender.com/my-cards', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
